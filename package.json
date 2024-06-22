@@ -1,0 +1,20 @@
+{
+  "name": "cardgame",
+  "version": "1.0.0",
+  "description": "Testbed for basic card game ideas",
+  "scripts": {
+    "build": "bun build ./src/index.ts --outdir ./build",
+	"start": "bun run ./cli.ts",
+    "test": "bun test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MichaelPastuch@github.com/MichaelPastuch/CardGame.git"
+  },
+  "author": "Michael Pastuch",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/MichaelPastuch/CardGame/issues"
+  },
+  "homepage": "https://github.com/MichaelPastuch/CardGame#readme"
+}
