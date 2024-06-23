@@ -26,13 +26,9 @@ export class CardPrinter {
 		// Center card name in frame
 		return `╔${CardPrinter.centerText(` ${card.name} `, "═")}╗\n` +
 			spacer +
-			spacer +
 			CardPrinter.printLine(`Attack: ${card.atk}`) +
-			spacer +
 			CardPrinter.printLine(`Defence: ${card.def}`) +
-			spacer +
 			CardPrinter.printLine(`Speed: ${card.spd}`) +
-			spacer +
 			spacer +
 			`╚${CardPrinter.centerText(` Total: ${card.total} `, "═")}╝`;
 	}
