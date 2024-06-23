@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MichaelPastuch/CardGame/issues"
   },
-  "homepage": "https://github.com/MichaelPastuch/CardGame#readme"
+  "homepage": "https://github.com/MichaelPastuch/CardGame#readme",
+  "devDependencies": {
+    "@types/bun": "1.1.5"
+  }
 }
