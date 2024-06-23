@@ -4,7 +4,7 @@
   "description": "Testbed for basic card game ideas",
   "scripts": {
     "build": "bun build ./src/index.ts --outdir ./build",
-	"start": "bun run ./cli.ts",
+	"start": "bun run ./src/cli.ts",
     "test": "bun test"
   },
   "repository": {
