@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Testbed for basic card game ideas",
   "scripts": {
-    "build": "bun build ./src/index.ts --outdir ./build",
-	"start": "bun run ./src/cli.ts",
+    "build": "bun build ./src/browser.ts --outdir ./build",
+    "start": "bun run ./src/cli.ts",
     "test": "bun test"
   },
   "repository": {
