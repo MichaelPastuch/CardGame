@@ -1,3 +1,4 @@
+import { Prng } from "prng";
 
 export class Card {
 
@@ -6,28 +7,31 @@ export class Card {
 
 	/** Generate card stats based on a given name */
 	public static generate(name: string) {
-		// Very crude name character code hash + bitwise "tinkering"
-		const magicNumber = 170;
-		const hash = name
-			.split("")
+		const checksum = Array.from(name)
 			.reduce((acc, char) => acc + char.charCodeAt(0), 0);
-		const strBase = (hash | magicNumber);
-		const magBase = ((strBase << 2) | magicNumber);
-		const spdBase = ((magBase << 2) | magicNumber);
-		// Clamop stats to 0-32
-		return new Card(name, strBase % 33, magBase % 33, spdBase % 33);
+		const gen = new Prng(checksum);
+		// Generate stat weights
+		const weights = [gen.next(), gen.next(), gen.next()];
+		const max = weights.reduce((acc, val) => Math.max(acc, val), 0);
+		// Determine card "tier" based on total
+		const tier = weights.reduce((acc, val) => acc + val, 0) % 12;
+		// Max stat is 100, subtract tier to get potential for this card
+		const base = 100 - tier;
+		// Normalize weights against max
+		const stats = weights.map((val) => Math.round(base * val / max));
+		return new Card(name, stats[0], stats[1], stats[2]);
 	}
 
 	constructor(
 		private readonly name: string,
-		// Should be integer values
-		private readonly str: number,
+		// Should be integer values from 0 - 100
+		private readonly atk: number,
 		private readonly def: number,
 		private readonly spd: number
 	) { }
 
 	public get total(): number {
-		return this.str + this.def + this.spd;
+		return this.atk + this.def + this.spd;
 	}
 
 	public get average(): number {
@@ -48,16 +52,14 @@ export class Card {
 		return `║${this.cliCenter(text)}║\n`;
 	}
 
-	/**
-	 * "Draw" the card
-	 */
+	/** "Draw" the card to terminal */
 	public get cli(): string {
 		const spacer = Card.cliLine("");
 		// Center card name in frame
 		return `╔${Card.cliCenter(` ${this.name} `, "═")}╗\n` +
 			spacer +
 			spacer +
-			Card.cliLine(`Strength: ${this.str}`) +
+			Card.cliLine(`Attack: ${this.atk}`) +
 			spacer +
 			Card.cliLine(`Defence: ${this.def}`) +
 			spacer +
