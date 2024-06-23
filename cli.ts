@@ -1,11 +1,13 @@
-import { Card } from "card";
+import { Deck } from "deck";
 
 console.log("Card game");
 
-console.log(Card.generate("Knight").cli);
-console.log(Card.generate("Mage").cli);
-console.log(Card.generate("Rogue").cli);
-console.log(Card.generate("Dragon").cli);
+const testDeck = Deck.fromNames(["Knight", "Mage", "Rogue", "Dragon"]);
 
-const genCard = Card.generate("Procedural");
-console.log(genCard.cli);
+// Dump deck to console
+testDeck.startGame();
+let next = testDeck.nextCard;
+while (next) {
+	console.log(next.cli);
+	next = testDeck.nextCard;
+}
