@@ -17,7 +17,7 @@ export class Prng {
 		// Update seeds
 		const iter = this.bytes[0] * 5 + 1;
 		this.bytes[0] = iter;
-		this.bytes[1] = 2 * this.bytes[1] + ((iter & 0xF0) === (iter & 0x02) ? 1 : 0);
+		this.bytes[1] = 2 * this.bytes[1] + (iter & 0xF0) === (iter & 0x02) ? 1 : 0;
 		return this.bytes[0] ^ this.bytes[1];
 	}
 
