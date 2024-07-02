@@ -10,10 +10,10 @@ export class Card {
 		// Generate stat weights
 		const weights = [gen.next(), gen.next(), gen.next()];
 		const max = weights.reduce((acc, val) => Math.max(acc, val), 0);
-		// Determine card "tier" based on total
-		const tier = weights.reduce((acc, val) => acc + val, 0) % 12;
-		// Max stat is 100, subtract tier to get potential for this card
-		const base = 100 - tier;
+		// Determine card "tier"
+		const tier = gen.next() % 12;
+		// Base stat is 64, add tier to get potential for this card
+		const base = 64 + 3 * tier;
 		// Normalize weights against max
 		const stats = weights.map((val) => Math.round(base * val / max));
 		return new Card(name, stats[0], stats[1], stats[2]);
